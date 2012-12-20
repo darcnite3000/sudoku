@@ -1,5 +1,9 @@
+require 'sudoku/cell_group'
+
 module Sudoku
   class Puzzle
+    class Invalid < StandardError
+    end
     Blocks = 
      [0,0,0,1,1,1,2,2,2,
       0,0,0,1,1,1,2,2,2,
@@ -23,45 +27,27 @@ module Sudoku
     
     def valid?
       (0..8).each do |i|
-        return false unless column_valid?(i) && row_valid?(i) && block_valid?(i)
+        return false unless column(i).valid? && row(i).valid? && block(i).valid?
       end
       true
     end
     
     def column x
-      col = []
+      col = CellGroup.new
       (x..80).step(9){|i| col << @cells[i] }
       col
     end
     
-    def column_valid? y
-      count = 0
-      column(y).uniq.each {|cell| count+=cell }
-      count == 45
-    end
-    
     def row y
-      @cells[y...((y+1)*9)]
-    end
-    
-    def row_valid? y
-      count = 0
-      row(y).uniq.each {|cell| count+=cell }
-      count == 45
+      CellGroup.new(@cells[(y*9)..((y+1)*9)])
     end
     
     def block position
-      block = []
+      block = CellGroup.new
       @cells.each_index do |index|
         block << @cells[index] if Blocks[index] == position
       end
       block
-    end
-    
-    def block_valid? position
-      count = 0
-      block(position).uniq.each {|cell| count+=cell }
-      count == 45
     end
     
     private

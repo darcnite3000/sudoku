@@ -29,13 +29,13 @@ describe Sudoku::Puzzle do
     expect(blank_puzzle[1,1]).to eq(0)
   end
   it 'can return a row set' do
-    expect(solved_puzzle.row 0).to eq([1,2,3,4,5,6,7,8,9])
+    expect(solved_puzzle.row(0).to_s).to eq([1,2,3,4,5,6,7,8,9].to_s)
   end
   it 'can return a column set' do
-    expect(solved_puzzle.column 0).to eq([1,4,7,6,2,9,8,5,3])
+    expect(solved_puzzle.column(0).to_s).to eq([1,4,7,6,2,9,8,5,3].to_s)
   end
   it 'can return a block set' do
-    expect(solved_puzzle.block 0).to eq([1,2,3,4,5,6,7,8,9])
+    expect(solved_puzzle.block(0).to_s).to eq([1,2,3,4,5,6,7,8,9].to_s)
   end
   
   it 'is valid if all rows columns and blocks are valid' do
@@ -44,25 +44,4 @@ describe Sudoku::Puzzle do
       expect(solved_puzzle.valid?).to eq(false)
   end
   
-  describe 'row' do
-    it 'is valid when all values are unique and adds up to 45' do
-      expect(solved_puzzle.row_valid? 0).to eq(true)
-      solved_puzzle[0,0] = 0
-      expect(solved_puzzle.row_valid? 0).to eq(false)
-    end
-  end
-  describe 'column' do
-    it 'is valid when all values are unique and adds up to 45' do
-      expect(solved_puzzle.column_valid? 0).to eq(true)
-      solved_puzzle[0,0] = 0
-      expect(solved_puzzle.column_valid? 0).to eq(false)
-    end
-  end
-  describe 'block' do
-    it 'is valid when all values are unique and adds up to 45' do
-      expect(solved_puzzle.block_valid? 0).to eq(true)
-      solved_puzzle[0,0] = 0
-      expect(solved_puzzle.block_valid? 0).to eq(false)
-    end
-  end
 end
