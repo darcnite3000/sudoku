@@ -18,7 +18,7 @@ module Sudoku
     end
     
     def to_a
-      @data
+      Array.new @data
     end
     
     def to_s
