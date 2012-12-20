@@ -20,6 +20,10 @@ describe Sudoku::Puzzle do
     expect(puzzle[0,0]).to eq(1)
     expect(puzzle[8,8]).to eq(5)
   end
+  it 'will 0 any invalid values from a staring array' do
+    puzzle = Sudoku::Puzzle.new(Array.new(81))
+    expect(puzzle[0,0]).to eq(0)
+  end
   it 'can set the value of a cell to be 0..9' do
     blank_puzzle[0,0] = 1
     expect(blank_puzzle[0,0]).to eq(1)
@@ -29,19 +33,19 @@ describe Sudoku::Puzzle do
     expect(blank_puzzle[1,1]).to eq(0)
   end
   it 'can return a row set' do
-    expect(solved_puzzle.row(0).to_s).to eq([1,2,3,4,5,6,7,8,9].to_s)
+    expect(solved_puzzle.row(0).to_a).to eq([1,2,3,4,5,6,7,8,9])
   end
   it 'can return a column set' do
-    expect(solved_puzzle.column(0).to_s).to eq([1,4,7,6,2,9,8,5,3].to_s)
+    expect(solved_puzzle.column(0).to_a).to eq([1,4,7,6,2,9,8,5,3])
   end
   it 'can return a block set' do
-    expect(solved_puzzle.block(0).to_s).to eq([1,2,3,4,5,6,7,8,9].to_s)
+    expect(solved_puzzle.block(0).to_a).to eq([1,2,3,4,5,6,7,8,9])
   end
   
   it 'is valid if all rows columns and blocks are valid' do
-      expect(solved_puzzle.valid?).to eq(true)
-      solved_puzzle[0,0] = 0
-      expect(solved_puzzle.valid?).to eq(false)
+    expect(solved_puzzle.valid?).to eq(true)
+    solved_puzzle[0,0] = 0
+    expect(solved_puzzle.valid?).to eq(false)
   end
   
 end

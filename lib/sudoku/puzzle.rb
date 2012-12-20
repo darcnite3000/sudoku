@@ -15,8 +15,15 @@ module Sudoku
       6,6,6,7,7,7,8,8,8,
       6,6,6,7,7,7,8,8,8].freeze
     
-    def initialize puzzle=Array.new(81,0)
+    def initialize puzzle=Array.new(81)
       @cells = Array.new(puzzle) if puzzle.length == 81
+      @cells.map! do |cell| 
+        if (0..9) === cell
+          cell
+        else
+          0
+        end
+      end
     end
     def []= x,y,value
       @cells[coord x, y] = value if (0..9) === value
