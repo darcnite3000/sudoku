@@ -12,6 +12,7 @@ module Sudoku
     def << value
       @data << value if @data.length < 9 && (0..9) === value
     end
+    alias_method :add, :<<
     
     def [] x
       @data[x]

@@ -6,6 +6,8 @@ describe Sudoku::CellGroup do
   it 'can append values' do
     blank_cellgroup << 1
     expect(blank_cellgroup[0]).to eq(1)
+    blank_cellgroup.add(2)
+    expect(blank_cellgroup[1]).to eq(2)
   end
   it 'is rejects non 0..9 values' do
     blank_cellgroup << 10
