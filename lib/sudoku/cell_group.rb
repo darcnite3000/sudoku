@@ -22,6 +22,10 @@ module Sudoku
       @data[x]
     end
     
+    def == other
+      other == @data
+    end
+    
     def to_a
       Array.new @data
     end
