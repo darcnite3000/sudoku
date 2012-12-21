@@ -14,7 +14,7 @@ module Sudoku
         6,6,6,7,7,7,8,8,8,
         6,6,6,7,7,7,8,8,8
       ].freeze
-    ValidValueRange = (0..9)
+    ValidValueRange = (0..9).freeze
     
     def initialize puzzle=Array.new(Blocks.length)
       @cells = Array.new(puzzle) if puzzle.length == Blocks.length

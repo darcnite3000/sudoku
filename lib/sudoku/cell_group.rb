@@ -1,8 +1,8 @@
 module Sudoku
   class CellGroup
-    ValidValueRange = (0..9)
-    ValidCount = (1..9).inject{|sum,x|sum+x}
-    MaxLength = 9
+    ValidValueRange = (0..9).freeze
+    ValidCount = (1..9).inject{|sum,x|sum+x}.freeze
+    MaxLength = 9.freeze
     
     def initialize enumerable=nil
       @data = []
