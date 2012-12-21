@@ -47,6 +47,11 @@ describe Sudoku::Puzzle do
     expect(col).to eq(solved_puzzle.column 0)
     expect(block).to eq(solved_puzzle.block 0)
   end
+  it 'can tell what values are available for a certain cell' do
+    solved_puzzle[0,0] = 0
+    expect(solved_puzzle.available_values 0, 0).to eq([1])
+    expect(blank_puzzle.available_values 0, 0).to eq((1..9).to_a)
+  end
   it 'is valid if all rows columns and blocks are valid' do
     expect(solved_puzzle.valid?).to eq(true)
     solved_puzzle[0,0] = 0

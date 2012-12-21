@@ -34,14 +34,19 @@ module Sudoku
       true
     end
     
+    def available_values x, y
+      r,c,b = cell_groups x, y
+      (1..9).to_a - r.to_a - c.to_a - b.to_a
+    end
+    
     def cell_groups x, y
       return row(x), column(y), block(Blocks[coord_to_pos x, y])
     end
     
     def column x
-      col = CellGroup.new
-      x.step(80,9){|i| col << @cells[i] }
-      col
+      group = CellGroup.new
+      x.step(80,9){|i| group << @cells[i] }
+      group
     end
     
     def row y
@@ -49,11 +54,11 @@ module Sudoku
     end
     
     def block position
-      block = CellGroup.new
+      group = CellGroup.new
       @cells.each_index do |index|
-        block << @cells[index] if Blocks[index] == position
+        group << @cells[index] if Blocks[index] == position
       end
-      block
+      group
     end
     
     private
