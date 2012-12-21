@@ -1,5 +1,9 @@
 module Sudoku
   class CellGroup
+    ValidValueRange = (0..9)
+    ValidCount = (1..9).inject{|sum,x|sum+x}
+    MaxLength = 9
+    
     def initialize enumerable=nil
       @data = []
       if enumerable.respond_to? :each
@@ -10,7 +14,7 @@ module Sudoku
     end
     
     def << value
-      @data << value if @data.length < 9 && (0..9) === value
+      @data << value if @data.length < MaxLength && ValidValueRange === value
     end
     alias_method :add, :<<
     
@@ -27,7 +31,7 @@ module Sudoku
     end
     
     def valid?
-      @data.uniq.inject{|sum,x|sum+x} == 45
+      @data.uniq.inject{|sum,x|sum+x} == ValidCount
     end
   end
 end
