@@ -16,8 +16,8 @@ module Sudoku
       ].freeze
     ValidValueRange = (0..9)
     
-    def initialize puzzle=Array.new(81)
-      @cells = Array.new(puzzle) if puzzle.length == 81
+    def initialize puzzle=Array.new(Blocks.length)
+      @cells = Array.new(puzzle) if puzzle.length == Blocks.length
       @cells.map!{ |cell| ValidValueRange === cell ? cell : 0 }
     end
     def []= x,y,value
@@ -28,7 +28,7 @@ module Sudoku
     end
     
     def valid?
-      8.times do |i|
+      9.times do |i|
         return false unless column(i).valid? && row(i).valid? && block(i).valid?
       end
       true
