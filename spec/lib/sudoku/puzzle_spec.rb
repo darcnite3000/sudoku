@@ -33,15 +33,20 @@ describe Sudoku::Puzzle do
     expect(blank_puzzle[1,1]).to eq(0)
   end
   it 'can return a row set' do
-    expect(solved_puzzle.row(0).to_a).to eq([1,2,3,4,5,6,7,8,9])
+    expect(solved_puzzle.row 0 ).to eq([1,2,3,4,5,6,7,8,9])
   end
   it 'can return a column set' do
-    expect(solved_puzzle.column(0).to_a).to eq([1,4,7,6,2,9,8,5,3])
+    expect(solved_puzzle.column 0).to eq([1,4,7,6,2,9,8,5,3])
   end
   it 'can return a block set' do
-    expect(solved_puzzle.block(0).to_a).to eq([1,2,3,4,5,6,7,8,9])
+    expect(solved_puzzle.block 0).to eq([1,2,3,4,5,6,7,8,9])
   end
-  
+  it 'can return the related cell groups' do
+    row, col, block = solved_puzzle.cell_groups 0, 0
+    expect(row).to eq(solved_puzzle.row 0)
+    expect(col).to eq(solved_puzzle.column 0)
+    expect(block).to eq(solved_puzzle.block 0)
+  end
   it 'is valid if all rows columns and blocks are valid' do
     expect(solved_puzzle.valid?).to eq(true)
     solved_puzzle[0,0] = 0

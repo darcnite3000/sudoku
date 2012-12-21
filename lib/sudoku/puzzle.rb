@@ -34,6 +34,10 @@ module Sudoku
       true
     end
     
+    def cell_groups x, y
+      return row(x), column(y), block(Blocks[coord_to_pos x, y])
+    end
+    
     def column x
       col = CellGroup.new
       x.step(80,9){|i| col << @cells[i] }
