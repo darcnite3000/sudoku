@@ -2,8 +2,6 @@ require 'sudoku/cell_group'
 
 module Sudoku
   class Puzzle
-    class Invalid < StandardError
-    end
     Blocks = 
       [
         0,0,0,1,1,1,2,2,2,
