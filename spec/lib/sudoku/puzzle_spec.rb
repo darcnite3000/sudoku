@@ -15,6 +15,7 @@ describe Sudoku::Puzzle do
       3,1,4,8,7,2,6,9,5]
   end
   let(:solved_puzzle){ Sudoku::Puzzle.new(solved_array) }
+  
   it 'can build a puzzle given a array' do
     puzzle = Sudoku::Puzzle.new(solved_array)
     expect(puzzle[0,0]).to eq(1)
@@ -52,9 +53,14 @@ describe Sudoku::Puzzle do
     expect(solved_puzzle.available_values 0, 0).to eq([1])
     expect(blank_puzzle.available_values 0, 0).to eq((1..9).to_a)
   end
+  it 'is solved if all rows columns and blocks are solved' do
+    expect(solved_puzzle.solved?).to eq(true)
+    solved_puzzle[0,0] = 0
+    expect(solved_puzzle.solved?).to eq(false)
+  end
   it 'is valid if all rows columns and blocks are valid' do
     expect(solved_puzzle.valid?).to eq(true)
-    solved_puzzle[0,0] = 0
+    solved_puzzle[0,0] = 9
     expect(solved_puzzle.valid?).to eq(false)
   end
   

@@ -1,7 +1,11 @@
-require 'sudoku/cell_group'
+require 'forwardable'
+require_relative 'cell_group'
 
 module Sudoku
   class Puzzle
+    extend Forwardable
+    include Enumerable
+    
     Blocks = 
       [
         0,0,0,1,1,1,2,2,2,
@@ -25,6 +29,13 @@ module Sudoku
     end
     def [] x,y
       @cells[coord_to_pos x, y] ||= 0
+    end
+    
+    def solved?
+      9.times do |i|
+        return false unless column(i).solved? && row(i).solved? && block(i).solved?
+      end
+      true
     end
     
     def valid?
@@ -60,6 +71,7 @@ module Sudoku
       end
       group
     end
+    def_delegator :@cells, :each, :each
     
     private
     def coord_to_pos x,y

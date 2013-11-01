@@ -35,6 +35,10 @@ module Sudoku
     end
     
     def valid?
+      @data.uniq.reject{|val| val==0 }.sort == @data.reject{|val|val==0}.sort
+    end
+    
+    def solved?
       @data.uniq.inject{|sum,x|sum+x} == ValidCount
     end
   end
