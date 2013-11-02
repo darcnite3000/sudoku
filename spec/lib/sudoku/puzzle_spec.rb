@@ -24,6 +24,17 @@ describe Sudoku::Puzzle do
       0,7,0,0,0,0,0,0,0,
       0,1,0,0,6,0,0,0,0]
   end
+  let(:string_array) do
+     ["0","0","0","4","0","0","0","0","0",
+      "0","0","0","0","0","0","0","8","2",
+      "0","0","1","3","0","0","0","0","0",
+      "0","0","0","6","7","0","0","0","0",
+      "8","3","0","0","1","2","0","0","0",
+      "0","4","7","0","0","5","1","0","0",
+      "0","0","0","8","0","9","0","0","0",
+      "0","7","0","0","0","0","0","0","0",
+      "0","1","0","0","6","0","0","0","0"]
+  end
   let(:solved_puzzle){ Sudoku::Puzzle.new(solved_array) }
   let(:partial_puzzle){ Sudoku::Puzzle.new(partial_array) }
   
@@ -31,6 +42,9 @@ describe Sudoku::Puzzle do
     puzzle = Sudoku::Puzzle.new(solved_array)
     expect(puzzle[0,0]).to eq(1)
     expect(puzzle[8,8]).to eq(5)
+  end
+  it 'will coerce any input number int' do
+    
   end
   it 'will 0 any invalid values from a staring array' do
     puzzle = Sudoku::Puzzle.new(Array.new(81))
@@ -43,6 +57,16 @@ describe Sudoku::Puzzle do
     expect(blank_puzzle[0,1]).to eq(2)
     blank_puzzle[1,1] = 10
     expect(blank_puzzle[1,1]).to eq(0)
+  end
+  it 'can be transformed back into an array' do
+    expect(solved_puzzle.to_a).to eq(solved_array)
+  end
+
+  it 'will coerce any input number int' do
+    puzzle = Sudoku::Puzzle.new(string_array)
+    expect(puzzle.to_a).to eq(string_array.map(&:to_i))
+    puzzle[0,0] = "1"
+    expect(puzzle[0,0]).to eq(1)
   end
   it 'can return a row set' do
     expect(solved_puzzle.row 0 ).to eq([1,2,3,4,5,6,7,8,9])

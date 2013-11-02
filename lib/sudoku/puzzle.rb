@@ -16,12 +16,12 @@ module Sudoku
     ValidValueRange = (0..9).freeze
     
     def initialize puzzle=Array.new(Blocks.length)
-      @cells = Array.new(puzzle) if puzzle.length == Blocks.length
+      @cells = Array.new(puzzle.map!(&:to_i)) if puzzle.length == Blocks.length
       @cells.map!{ |cell| ValidValueRange === cell ? cell : 0 }
     end
     
     def []= x,y,value
-      @cells[coord_to_pos x, y] = value if ValidValueRange === value
+      @cells[coord_to_pos x, y] = value.to_i if ValidValueRange === value.to_i
     end
     
     def [] x,y
