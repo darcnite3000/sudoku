@@ -1,5 +1,4 @@
 require 'forwardable'
-
 module Sudoku
   class Puzzle
     extend Forwardable
@@ -50,7 +49,7 @@ module Sudoku
     end
     
     def cell_groups x, y
-      return row(x), column(y), block(Blocks[coord_to_pos x, y])
+      return row(y), column(x), block(Blocks[coord_to_pos x, y])
     end
     
     def column x
@@ -70,7 +69,6 @@ module Sudoku
       end
       group
     end
-    def_delegator :@cells, :each, :each
     
     private
     def coord_to_pos x,y
@@ -79,6 +77,7 @@ module Sudoku
     def pos_to_coord cell
       cell.divmod 9
     end 
+    def_delegator :@cells, :each, :each
   end
   
 end

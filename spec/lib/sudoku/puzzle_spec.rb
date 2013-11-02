@@ -13,7 +13,19 @@ describe Sudoku::Puzzle do
       5,6,2,9,4,1,3,7,8,
       3,1,4,8,7,2,6,9,5]
   end
+  let(:partial_array) do
+     [0,0,0,4,0,0,0,0,0,
+      0,0,0,0,0,0,0,8,2,
+      0,0,1,3,0,0,0,0,0,
+      0,0,0,6,7,0,0,0,0,
+      8,3,0,0,1,2,0,0,0,
+      0,4,7,0,0,5,1,0,0,
+      0,0,0,8,0,9,0,0,0,
+      0,7,0,0,0,0,0,0,0,
+      0,1,0,0,6,0,0,0,0]
+  end
   let(:solved_puzzle){ Sudoku::Puzzle.new(solved_array) }
+  let(:partial_puzzle){ Sudoku::Puzzle.new(partial_array) }
   
   it 'can build a puzzle given a array' do
     puzzle = Sudoku::Puzzle.new(solved_array)
@@ -51,6 +63,7 @@ describe Sudoku::Puzzle do
     solved_puzzle[0,0] = 0
     expect(solved_puzzle.available_values 0, 0).to eq([1])
     expect(blank_puzzle.available_values 0, 0).to eq((1..9).to_a)
+    expect(partial_puzzle.available_values 7, 4).to eq([4, 5, 6, 7, 9])
   end
   it 'is solved if all rows columns and blocks are solved' do
     expect(solved_puzzle.solved?).to eq(true)
