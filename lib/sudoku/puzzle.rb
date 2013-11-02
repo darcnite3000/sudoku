@@ -1,8 +1,5 @@
-require 'forwardable'
 module Sudoku
   class Puzzle
-    extend Forwardable
-    include Enumerable
     
     Blocks = 
       [
@@ -22,11 +19,17 @@ module Sudoku
       @cells = Array.new(puzzle) if puzzle.length == Blocks.length
       @cells.map!{ |cell| ValidValueRange === cell ? cell : 0 }
     end
+    
     def []= x,y,value
       @cells[coord_to_pos x, y] = value if ValidValueRange === value
     end
+    
     def [] x,y
       @cells[coord_to_pos x, y] ||= 0
+    end
+    
+    def to_a
+      @cells
     end
     
     def solved?
@@ -45,7 +48,7 @@ module Sudoku
     
     def available_values x, y
       r,c,b = cell_groups x, y
-      cell = p @cells[coord_to_pos x, y]
+      cell = @cells[coord_to_pos x, y]
       values = (1..9).to_a - r.to_a - c.to_a - b.to_a
       if cell != 0
         values = values + [cell]
@@ -82,7 +85,6 @@ module Sudoku
     def pos_to_coord cell
       cell.divmod 9
     end 
-    def_delegator :@cells, :each, :each
   end
   
 end
