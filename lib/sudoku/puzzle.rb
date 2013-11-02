@@ -1,5 +1,4 @@
 require 'forwardable'
-require_relative 'cell_group'
 
 module Sudoku
   class Puzzle

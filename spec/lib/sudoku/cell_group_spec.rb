@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'sudoku/cell_group'
 
 describe Sudoku::CellGroup do
   let(:blank_cellgroup){ Sudoku::CellGroup.new }

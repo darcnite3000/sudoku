@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'sudoku/puzzle'
 
 describe Sudoku::Puzzle do
   let(:blank_puzzle) { Sudoku::Puzzle.new }
