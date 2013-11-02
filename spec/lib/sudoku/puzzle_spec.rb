@@ -64,6 +64,7 @@ describe Sudoku::Puzzle do
     expect(solved_puzzle.available_values 0, 0).to eq([1])
     expect(blank_puzzle.available_values 0, 0).to eq((1..9).to_a)
     expect(partial_puzzle.available_values 7, 4).to eq([4, 5, 6, 7, 9])
+    expect(partial_puzzle.available_values 7, 1).to eq([1,3,4,5,6,7,8,9])
   end
   it 'is solved if all rows columns and blocks are solved' do
     expect(solved_puzzle.solved?).to eq(true)

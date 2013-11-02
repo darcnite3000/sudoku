@@ -1,6 +1,5 @@
 GEM
-  remote: https://rubygems.org/
-  remote: https://rubygems.railscamp.org/
+  remote: http://rubygems.railscamp.org/
   specs:
     coderay (1.0.9)
     diff-lcs (1.1.3)

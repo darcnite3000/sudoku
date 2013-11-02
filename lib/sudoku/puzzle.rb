@@ -45,7 +45,12 @@ module Sudoku
     
     def available_values x, y
       r,c,b = cell_groups x, y
-      (1..9).to_a - r.to_a - c.to_a - b.to_a
+      cell = p @cells[coord_to_pos x, y]
+      values = (1..9).to_a - r.to_a - c.to_a - b.to_a
+      if cell != 0
+        values = values + [cell]
+      end
+      values.sort
     end
     
     def cell_groups x, y
